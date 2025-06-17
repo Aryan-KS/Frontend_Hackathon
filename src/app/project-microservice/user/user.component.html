@@ -1,0 +1,94 @@
+<h2> USER PAGE</h2>
+
+
+<hr>
+
+<h3>ADD USER:</h3>
+
+<form (ngSubmit)="addUserCall()">
+
+    <input [(ngModel)]="newUser.name" name="name" placeholder="name" required><br>
+    <input [(ngModel)]="newUser.email" name="email" placeholder="email" required><br>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+<h3>VIEW BY ID:</h3>
+
+<input [(ngModel)]="id" name="id" placeholder="id" required><br>
+<button (click)="getUserByIdCall()">Submit</button>
+
+
+
+<table border="2">
+
+    <thead>
+
+        <tr>
+
+            <th>ID:</th>
+            <th>Name:</th>
+            <th>Email:</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngIf="userById!=null">
+            <td>{{userById.id}}</td>
+            <td>{{userById.name}}</td>
+            <td>{{userById.email}}</td>
+
+        </tr>
+    </tbody>
+
+</table>
+
+<hr>
+
+<h3>VIEW ALL</h3>
+
+<table border="2">
+
+    <thead>
+
+        <tr>
+
+            <th>ID:</th>
+            <th>Name:</th>
+            <th>Email:</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let user of userList">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+
+                <button (click)="deleteUserCall(user.id!)">Delete</button>
+                <button (click)="populateUpdateForm(user)">Update</button>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<hr>
+
+<h3>UPDATE TABLE</h3>
+
+
+<form (ngSubmit)="updateUserCall()">
+
+
+    <input [(ngModel)]="updatedUser.id" name="id" placeholder="id" required readonly><br>
+
+    <input [(ngModel)]="updatedUser.name" name="name" placeholder="name" required><br>
+    <input [(ngModel)]="updatedUser.email" name="email" placeholder="email" required><br>
+    <br>
+    <button type="submit">Submit</button>
+</form>

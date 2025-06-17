@@ -1,0 +1,117 @@
+<h2> PROJECT PAGE</h2>
+
+
+<hr>
+
+<h3>ADD PROJECT:</h3>
+
+<form (ngSubmit)="addProjectCall()">
+
+    <input [(ngModel)]="newProject.title" name="name" placeholder="name" required><br>
+    <input [(ngModel)]="newProject.endDate" name="endDate" placeholder="endDate" type="date" required> <br>
+    <input [(ngModel)]="newProject.startDate" name="startDate" placeholder="startDate" type="date" required><br>
+    <input [(ngModel)]="newProject.description" name="description" placeholder="description" required><br>
+
+
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+<h3>VIEW BY ID:</h3>
+
+<input [(ngModel)]="id" name="id" placeholder="id" required><br>
+<button (click)="getProjectByIdCall()">Submit</button>
+
+
+
+<table border="2">
+
+    <thead>
+
+        <tr>
+
+            <th>ID:</th>
+            <th>StartDate:</th>
+            <th>EndDate:</th>
+            <th>Description:</th>
+            <th>Title:</th>
+            <th>UserList:</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngIf="projectById!=null">
+            <td>{{projectById.id}}</td>
+            <td>{{projectById.startDate}}</td>
+            <td>{{projectById.endDate}}</td>
+            <td>{{projectById.description}}</td>
+            <td>{{projectById.title}}</td>
+            <td>{{projectById.userList.at(0)}}</td>
+
+        </tr>
+    </tbody>
+
+</table>
+
+<hr>
+
+<h3>VIEW ALL</h3>
+
+<table border="2">
+
+    <thead>
+
+        <tr>
+
+            <th>ID:</th>
+            <th>StartDate:</th>
+            <th>EndDate:</th>
+            <th>Description:</th>
+            <th>Title:</th>
+            <th>UserList:</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let project of projectList">
+            <td>{{project.id}}</td>
+            <td>{{project.startDate}}</td>
+            <td>{{project.endDate}}</td>
+            <td>{{project.description}}</td>
+            <td>{{project.title}}</td>
+            <td>
+                <div *ngFor="let user of project.userList">
+                    <p>{{user.id}},
+                        {{user.name}},
+                        {{user.email}}</p>
+
+
+                </div>
+            </td>
+            <td>
+
+                <button (click)="deleteProjectCall(project.id!)">Delete</button>
+                <button (click)="populateUpdateForm(project)">Update</button>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<hr>
+
+<h3>UPDATE TABLE</h3>
+
+
+<form (ngSubmit)="updateProjectCall()">
+
+    <input [(ngModel)]="updatedProject.title" name="name" placeholder="name" required><br>
+    <input [(ngModel)]="updatedProject.endDate" name="endDate" placeholder="endDate" type="date" required><br>
+    <input [(ngModel)]="updatedProject.startDate" name="startDate" placeholder="startDate" type="date" required><br>
+    <input [(ngModel)]="updatedProject.description" name="description" placeholder="description" required><br>
+    <br>
+    <button type="submit">Submit</button>
+</form>

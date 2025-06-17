@@ -1,0 +1,167 @@
+<h2> TASK PAGE</h2>
+
+
+<hr>
+
+<h3>ADD TASK:</h3>
+
+<form (ngSubmit)="addTaskCall()">
+
+    <input [(ngModel)]="newTask.title" name="title" placeholder="title" required><br>
+
+    <input [(ngModel)]="newTask.description" name="description" placeholder="description" required>
+    <br>
+
+    <label for="userDropDown">USER:</label><br>
+
+    <select [(ngModel)]="newTask.assignedTo" name="assignedTo">
+
+        <option *ngFor="let user of userList" [ngValue]="user">
+            {{user.id}}
+        </option>
+    </select> <br>
+
+    <label for="projectDropDown">Project:</label><br>
+
+    <select [(ngModel)]="newTask.project" name="project">
+
+        <option *ngFor="let project of projectList" [ngValue]="project">
+            {{project.id}}
+        </option>
+    </select> <br>
+
+    <label for="statusDropDown">Status:</label><br>
+
+    <select [(ngModel)]="newTask.status" name="status">
+
+        <option *ngFor="let status of statusList" [ngValue]="status">
+            {{status}}
+        </option>
+    </select>
+
+
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+<h3>VIEW BY ID:</h3>
+
+<input [(ngModel)]="id" name="id" placeholder="id" required><br>
+<button (click)="getTaskByIdCall()">Submit</button>
+
+
+
+<table border="2">
+
+    <thead>
+
+        <tr>
+
+            <th>ID:</th>
+            <th>Description:</th>
+            <th>title:</th>
+            <th>AssignedTO:</th>
+            <th>Project:</th>
+            <th>Status:</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngIf="taskById!=null">
+            <td>{{taskById.id}}</td>
+            <td>{{taskById.description}}</td>
+            <td>{{taskById.title}}</td>
+            <td>{{taskById.assignedTo.id}}</td>
+            <td>{{taskById.project.id}}</td>
+            <td>{{taskById.status}}</td>
+
+
+        </tr>
+    </tbody>
+
+</table>
+
+<hr>
+
+<h3>VIEW ALL</h3>
+
+<table border="2">
+
+    <thead>
+
+        <tr>
+
+            <th>ID:</th>
+            <th>Description:</th>
+            <th>title:</th>
+            <th>AssignedTO:</th>
+            <th>Project:</th>
+            <th>Status:</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let task of taskList">
+            <td>{{task.id}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.title}}</td>
+            <td>{{task.assignedTo.id}}</td>
+            <td>{{task.project.id}}</td>
+            <td>{{task.status}}</td>
+
+            <td>
+
+                <button (click)="deleteTaskCall(task.id!)">Delete</button>
+                <button (click)="populateUpdateForm(task)">Update</button>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<hr>
+
+<h3>UPDATE TABLE</h3>
+
+
+<form (ngSubmit)="updateTaskCall()">
+
+    <input [(ngModel)]="updatedTask.title" name="name" placeholder="name" required><br>
+
+    <input [(ngModel)]="updatedTask.description" name="description" placeholder="description" required>
+    <br>
+
+    <label for="userDropDown">USER:</label><br>
+
+    <select [(ngModel)]="updatedTask.assignedTo" name="assignedTo">
+
+        <option *ngFor="let user of userList" [ngValue]="user">
+            {{user.id}}
+        </option>
+    </select> <br>
+
+    <label for="projectDropDown">USER:</label><br>
+
+    <select [(ngModel)]="updatedTask.project" name="project">
+
+        <option *ngFor="let project of projectList" [ngValue]="project">
+            {{project.id}}
+        </option>
+    </select> <br>
+
+    <label for="statusDropDown">USER:</label><br>
+
+    <select [(ngModel)]="updatedTask.status" name="status">
+
+        <option *ngFor="let status of statusList" [ngValue]="status">
+            {{status}}
+        </option>
+    </select>
+
+
+    <br>
+    <button type="submit">Submit</button>
+</form>
